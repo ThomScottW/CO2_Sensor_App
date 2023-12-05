@@ -23,7 +23,7 @@ const Sensing = () => {
 
   return (
     <View style={styles.data}>
-      <Text style={styles.SensingTitle}>CO2 Sensing App</Text>
+      <Text style={styles.SensingTitle}>Air Quality Sensing App</Text>
       <View style={styles.dataWrapper}>
         <View style={styles.co2}>
           <Text style={styles.title}>CO2 Concentration</Text>
@@ -109,5 +109,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 40,
     paddingTop: 70,
+    fontWeight: "bold",
   },
 })
