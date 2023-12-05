@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { useEffect, useState } from "react";
 import { db, ref, onValue } from "../firebase";
 import { useNavigation } from '@react-navigation/native';
@@ -43,7 +43,7 @@ const Sensing = () => {
 
   const handleCo2BoxPress = () => {
     const truncatedCo2History = truncateHistory(co2ConcentrationHistory)
-    navigation.navigate('Co2Details', {co2ConcentrationHistory: truncatedCo2History});
+    navigation.navigate('Co2Details', { co2ConcentrationHistory: truncatedCo2History });
   };
 
   const handleTemperatureBoxPress = () => {
@@ -59,26 +59,29 @@ const Sensing = () => {
     <View style={styles.data}>
       <Text style={styles.SensingTitle}>Air Quality Sensing App</Text>
       <View style={styles.dataWrapper}>
-      <TouchableOpacity style={styles.touchOpacity} onPress={handleCo2BoxPress}>
+        <TouchableOpacity style={styles.touchOpacity} onPress={handleCo2BoxPress}>
           <View style={styles.co2}>
+            <Image source={require('../assets/co2_icon.png')} style={styles.icon} />
             <Text style={styles.title}>CO2 Concentration</Text>
             <Text style={styles.dataText}>{Math.round(co2_concentration)} ppm</Text>
           </View>
         </TouchableOpacity>
 
-      <TouchableOpacity style={styles.touchOpacity} onPress={handleTemperatureBoxPress}>
-        <View style={styles.temperature}>
-          <Text style={styles.title}>Temperature</Text>
-          <Text style={styles.dataText}>{(temperature * 9 / 5 + 32).toFixed(2)}°F</Text>
-        </View>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.touchOpacity} onPress={handleTemperatureBoxPress}>
+          <View style={styles.temperature}>
+            <Image source={require('../assets/temperature_icon.png')} style={styles.icon} />
+            <Text style={styles.title}>Temperature</Text>
+            <Text style={styles.dataText}>{(temperature * 9 / 5 + 32).toFixed(2)}°F</Text>
+          </View>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.touchOpacity} onPress={handleHumidityBoxPress}>
-        <View style={styles.humidity}>
-          <Text style={styles.title}>Humidity</Text>
-          <Text style={styles.dataText}>{humidity.toFixed(2)}%</Text>
-        </View>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.touchOpacity} onPress={handleHumidityBoxPress}>
+          <View style={styles.humidity}>
+            <Image source={require('../assets/humidity_icon.png')} style={styles.icon} />
+            <Text style={styles.title}>Humidity</Text>
+            <Text style={styles.dataText}>{humidity.toFixed(2)}%</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -156,5 +159,10 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     justifyContent: "center",
-  }
+  },
+  icon: {
+    width: 85, // Adjust the width and height according to your needs
+    height: 85,
+    marginBottom: 10, // Optional: Adjust the margin to control the space between the icon and text
+  },
 })
